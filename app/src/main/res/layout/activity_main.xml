@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/newPersonButton"
         android:layout_width="200dp"
         android:layout_height="46dp"
         android:layout_marginTop="36dp"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/customTweeteditText"
         android:layout_width="309dp"
         android:layout_height="98dp"
         android:layout_marginTop="40dp"
@@ -32,10 +32,10 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/userStatistics" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -47,7 +47,7 @@
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/userStatistics"
         android:layout_width="233dp"
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
@@ -55,11 +55,11 @@
         android:layout_marginTop="4dp"
         android:text="@exampleHandle | 212K followers"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/profilePicture"
+        app:layout_constraintTop_toBottomOf="@+id/realName" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/realName"
         android:layout_width="145dp"
         android:layout_height="21dp"
         android:layout_marginStart="8dp"
@@ -67,15 +67,15 @@
         android:text="Example Twitter"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/profilePicture"
+        app:layout_constraintTop_toTopOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.078" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/tweetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/customTweeteditText" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -94,9 +94,9 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/realName"
+        app:layout_constraintStart_toEndOf="@+id/realName"
+        app:layout_constraintTop_toTopOf="@+id/realName"
         app:srcCompat="@drawable/verifiedbadge" />
 
     <TextView
@@ -106,7 +106,7 @@
         android:layout_marginBottom="28dp"
         android:text="you are now tweeting to..."
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/realName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
