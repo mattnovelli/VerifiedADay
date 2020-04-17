@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     Button tweetButton = (Button) findViewById(R.id.tweetButton);
+    Button newPersonButton = (Button) findViewById(R.id.newPersonButton);
     
 }
