@@ -10,104 +10,92 @@
         android:id="@+id/newPersonButton"
         android:layout_width="200dp"
         android:layout_height="46dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:background="#1DCAFF"
         android:text="give me a new person"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/customTweeteditText"
-        android:layout_width="309dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="your tweet here..."
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userStatistics" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="92dp"
         android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/customTweeteditText"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
-
-    <TextView
-        android:id="@+id/userStatistics"
-        android:layout_width="233dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:text="@exampleHandle | 212K followers"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/realName" />
-
-    <TextView
-        android:id="@+id/realName"
-        android:layout_width="145dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Example Twitter"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/profilePicture"
-        app:layout_constraintTop_toTopOf="@+id/profilePicture"
-        app:layout_constraintVertical_bias="0.078" />
 
     <Button
         android:id="@+id/tweetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:background="#1DCAFF"
         android:text="tweet"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/customTweeteditText"
         app:layout_constraintTop_toBottomOf="@+id/customTweeteditText" />
+
+    <EditText
+        android:id="@+id/customTweeteditText"
+        android:layout_width="262dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="your tweet here..."
+        android:imeOptions="actionDone|flagNoEnterAction"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
+
+    <TextView
+        android:id="@+id/userHandle"
+        android:layout_width="210dp"
+        android:layout_height="21dp"
+        android:text="@exampleHandle"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/customTweeteditText"
+        app:layout_constraintStart_toStartOf="@+id/customTweeteditText" />
+
+    <TextView
+        android:id="@+id/realName"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        android:text="Example Twitter"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profilePicture"
+        app:layout_constraintTop_toTopOf="@+id/profilePicture" />
+
+    <TextView
+        android:id="@+id/userFollowers"
+        android:layout_width="210dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="4dp"
+        android:text="212K followers"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/realName"
+        app:layout_constraintTop_toBottomOf="@+id/realName" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="19dp"
         android:layout_height="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/realName"
         app:layout_constraintStart_toEndOf="@+id/realName"
         app:layout_constraintTop_toTopOf="@+id/realName"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/verifiedbadge" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="you are now tweeting to..."
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/realName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
