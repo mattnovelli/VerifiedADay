@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Button tweetButton = (Button) findViewById(R.id.tweetButton);
     }
     RequestQueue queue = Volley.newRequestQueue(this);
-    StringRequest string =
+    String Request =
     /*Button newPersonButton = (Button) findViewById(R.id.newPersonButton);
 
     //click new person button?
