@@ -16,17 +16,34 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class MainActivity extends AppCompatActivity {
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
+public class MainActivity extends AppCompatActivity {
+    private ConfigurationBuilder cb;
+    private Twitter twitter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey("kz1TfvAMkW6nXoByfLlpzAcwE")
+                .setOAuthConsumerSecret("ioGeVBDBLLLYhMVg1NJVPwRFzLc1kUTBxR6yW4GpmXguZChDUa")
+                .setOAuthAccessToken("1252348218802921472-7tQhBxzAzAP3fFWIbwD6wnvqNZAoiJ")
+                .setOAuthAccessTokenSecret("Uq1DsVGwVHFDDQd057uus7sK8kRoIG3UleNo1pPNQeLzo");
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        twitter = tf.getInstance();
+        try {
+            twitter.updateStatus("Verifried is online!");
+        } catch (Exception e) {
+            System.out.println("oopsies");
+        }
         Button tweetButton = (Button) findViewById(R.id.tweetButton);
     }
 
     public String tweetCreate() {
-        final TextView tweet = (TextView) findViewById(R.id.customTweeteditText);
+        final TextView tweet = (TextView) findViewById(R.id.customText);
         RequestQueue queue1 = Volley.newRequestQueue(this);
         //Get.friends/Ids sample string request experiment
         StringRequest getFriends = new StringRequest(Request.Method.GET, "https://api.twitter.com/1.1/friends/ids.json",
@@ -46,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(tweet.toString());
         return tweet.toString();
     }
-
+}
 
 
     /*Button newPersonButton = (Button) findViewById(R.id.newPersonButton);
@@ -75,4 +92,4 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }*/
 
-}
+//}
