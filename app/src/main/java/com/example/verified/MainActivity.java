@@ -21,8 +21,12 @@ public class MainActivity extends AppCompatActivity {
         final Button tweetButton = findViewById(R.id.tweetButton);
         tweetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                CustomTweet newTweet = new CustomTweet("hello world");
-                newTweet.sendTweet();
+                new Thread(new Runnable() {
+                    public void run() {
+                        CustomTweet newTweet = new CustomTweet("hello world");
+                        newTweet.sendTweet();
+                    }
+                }).start();
             }
         });
     }
