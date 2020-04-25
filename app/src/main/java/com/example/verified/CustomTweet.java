@@ -9,10 +9,10 @@ public class CustomTweet {
     public void sendTweet() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("kz1TfvAMkW6nXoByfLlpzAcwE")
-                .setOAuthConsumerSecret("ioGeVBDBLLLYhMVg1NJVPwRFzLc1kUTBxR6yW4GpmXguZChDUa")
-                .setOAuthAccessToken("1252348218802921472-7tQhBxzAzAP3fFWIbwD6wnvqNZAoiJ")
-                .setOAuthAccessTokenSecret("Uq1DsVGwVHFDDQd057uus7sK8kRoIG3UleNo1pPNQeLzo");
+                .setOAuthConsumerKey("vS4OiZPnWYUadzkvVdjEXiVZt")
+                .setOAuthConsumerSecret("C0ZazMsghJwfj19jNkyiauH8INBpAKDYdzhA1ieaUFDK4vXnnF")
+                .setOAuthAccessToken("1252348218802921472-KbdNILC36MI8AQ9JnUfGBHQN1Rmx5f")
+                .setOAuthAccessTokenSecret("mi5UFWog6LRTwMrFo5eCEQx18IHl1hpjJZUfN19MxLd36");
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         try {
