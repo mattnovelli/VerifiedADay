@@ -12,23 +12,36 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    String newVerified;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        final Button newPersonButton = findViewById(R.id.newPersonButton);
+        newPersonButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    public void run() {
+                         newVerified = "@ new person"; //randomized array of verifieds?
+                    }
+                }).start();
+            }
+        });
 
         final Button tweetButton = findViewById(R.id.tweetButton);
         tweetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new Thread(new Runnable() {
                     public void run() {
-                        CustomTweet newTweet = new CustomTweet("hello world");
+                        CustomTweet newTweet = new CustomTweet(newVerified + " " + "hello world");
                         newTweet.sendTweet();
                     }
                 }).start();
             }
         });
+
     }
 
 //    public String tweetCreate() {
