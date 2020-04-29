@@ -13,35 +13,31 @@ import twitter4j.User;
 
 
 public class MainActivity extends AppCompatActivity {
-    private CustomTweet newTweet = new CustomTweet();
-    private User targetUser = newTweet.getRandomFriend();
-    String name = targetUser.getName();
-    String handle = targetUser.getScreenName();
-    int followers = targetUser.getFollowersCount();
+    private CustomTweet newTweet;
+    private User targetUser;
+    private String name;
+    private String handle;
+    int followers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        try {
+            regenerateTarget();
+        } catch (Exception e) {
+            System.out.println("oopsies");
+        }
         final Button newPersonButton = findViewById(R.id.newPersonButton);
         newPersonButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new Thread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     public void run() {
-                        targetUser = newTweet.getRandomFriend();
-                        name = targetUser.getName();
-                        handle = targetUser.getScreenName();
-                        followers = targetUser.getFollowersCount();
-
-                        TextView userHandle = (TextView) findViewById(R.id.userHandle);
-                        userHandle.setText(handle);
-
-                        TextView realname = (TextView) findViewById(R.id.realName);
-                        realname.setText(name);
-
-                        TextView userFollowers = (TextView) findViewById(R.id.userFollowers);
-                        userFollowers.setText(followers + " followers");
+                        try {
+                            regenerateTarget();
+                        } catch (Exception e) {
+                            System.out.println("oopsies");
+                        }
                     }
                 }).start();
             }
@@ -60,6 +56,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void regenerateTarget() {
+        CustomTweet newTweet = new CustomTweet();
+        User targetUser = newTweet.getRandomFriend();
+        name = targetUser.getName();
+        handle = targetUser.getScreenName();
+        followers = targetUser.getFollowersCount();
+
+        TextView userHandle = (TextView) findViewById(R.id.userHandle);
+        userHandle.setText(handle);
+
+        TextView realname = (TextView) findViewById(R.id.realName);
+        realname.setText(name);
+
+        TextView userFollowers = (TextView) findViewById(R.id.userFollowers);
+        userFollowers.setText(followers + " followers");
     }
 
 //    public String tweetCreate() {
