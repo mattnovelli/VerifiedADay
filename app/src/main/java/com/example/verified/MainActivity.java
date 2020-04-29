@@ -5,26 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.textclassifier.TextLinks;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import twitter4j.User;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    String newVerified;
+    private CustomTweet newTweet = new CustomTweet();
+    private User targetUser = newTweet.getRandomFriend();
+    String name = targetUser.getName();
+    String handle = targetUser.getScreenName();
+    int followers = targetUser.getFollowersCount();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         final Button newPersonButton = findViewById(R.id.newPersonButton);
         newPersonButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new Thread(new Runnable() {
+                    @SuppressLint("SetTextI18n")
                     public void run() {
-                         newVerified = "@ new person"; //randomized array of verifieds?
+                        targetUser = newTweet.getRandomFriend();
+                        name = targetUser.getName();
+                        handle = targetUser.getScreenName();
+                        followers = targetUser.getFollowersCount();
+
+                        TextView userHandle = (TextView) findViewById(R.id.userHandle);
+                        userHandle.setText(handle);
+
+                        TextView realname = (TextView) findViewById(R.id.realName);
+                        realname.setText(name);
+
+                        TextView userFollowers = (TextView) findViewById(R.id.userFollowers);
+                        userFollowers.setText(followers + " followers");
                     }
                 }).start();
             }
@@ -35,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new Thread(new Runnable() {
                     public void run() {
-                        CustomTweet newTweet = new CustomTweet(newVerified + " " + "hello world");
-                        newTweet.sendTweet();
+                        EditText text = (EditText)findViewById(R.id.customText);
+                        String value = text.getText().toString();
+                        newTweet.sendTweet("@" + handle + value);
                     }
                 }).start();
             }
