@@ -7,6 +7,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import twitter4j.PagableResponseList;
 import twitter4j.Twitter;
@@ -17,8 +18,8 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class CustomTweet {
     private Twitter twitter = ConfigurationFactory();
-    private PagableResponseList<User> users;
-    private User sampleuser;
+    private List<User> users = null;
+    private final long VERIFIED_USER_ID = 63796828;
     public void sendTweet(String text) {
         try {
             twitter.updateStatus(text);
@@ -26,19 +27,27 @@ public class CustomTweet {
             System.out.println("oopsies:" + e);
         }
     }
-    public User getRandomFriend() {
+    public List<User> twitterAPIFriends() {
         new Thread(new Runnable() {
             public void run() {
-                long cursor = 1;
                 try {
-                    users = twitter.getFriendsList("verified", cursor);
-                    System.out.println("users list: " + users);
+                    System.out.println("making twitter API call!");
+                    users = twitter.getFriendsList(VERIFIED_USER_ID, -1);
+                    //System.out.println("users" + users);
+                    //Thread.sleep(1000);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
                 } catch (TwitterException e) {
                     e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
                 }
             }
         }).start();
-        Random random = new Random();
+        return users;
+    }
+    public User getRandomFriend() {
+//        Random random = new Random();
 //        return users.get(random.nextInt(users.size()));
         return users.get(1);
     }

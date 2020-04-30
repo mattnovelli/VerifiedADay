@@ -8,16 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.NumberFormat;
+import java.util.List;
+import java.util.Random;
 
 import twitter4j.User;
 
 
 public class MainActivity extends AppCompatActivity {
-    private CustomTweet newTweet;
+    private CustomTweet newTweet = new CustomTweet();
     private User targetUser;
-    private String name;
-    private String handle;
-    int followers;
+    private List<User> userList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             regenerateTarget();
         } catch (Exception e) {
-            System.out.println("oopsies");
+            System.out.println("oopsies in onCreate: " + e);
         }
         final Button newPersonButton = findViewById(R.id.newPersonButton);
         newPersonButton.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             regenerateTarget();
                         } catch (Exception e) {
-                            System.out.println("oopsies");
+                            System.out.println("oopsies in newPersonButton" + e);
                         }
                     }
                 }).start();
@@ -48,80 +52,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new Thread(new Runnable() {
                     public void run() {
-                        EditText text = (EditText)findViewById(R.id.customText);
-                        String value = text.getText().toString();
-                        newTweet.sendTweet("@" + handle + value);
+                        EditText customText = (EditText) findViewById(R.id.customText);
+                        System.out.println("current user is" + targetUser);
+                        String tweet = "@" + targetUser.getScreenName() + " " + customText.getText().toString();
+                        newTweet.sendTweet(tweet);
+                        customText.getText().clear();
                     }
                 }).start();
+                Toast.makeText(MainActivity.this, "Tweet sent!",
+                        Toast.LENGTH_SHORT).show();
+                //regenerateTarget();
             }
         });
 
     }
+
     public void regenerateTarget() {
-        CustomTweet newTweet = new CustomTweet();
-        User targetUser = newTweet.getRandomFriend();
-        name = targetUser.getName();
-        handle = targetUser.getScreenName();
-        followers = targetUser.getFollowersCount();
+        //newTweet = new CustomTweet();
+        NumberFormat customFormat = NumberFormat.getInstance();
+        customFormat.setGroupingUsed(true);
+        userList = newTweet.twitterAPIFriends();
+
+        Random random = new Random();
+        targetUser = userList.get(random.nextInt(userList.size()));
 
         TextView userHandle = (TextView) findViewById(R.id.userHandle);
-        userHandle.setText(handle);
+        userHandle.setText("@" + targetUser.getScreenName());
 
         TextView realname = (TextView) findViewById(R.id.realName);
-        realname.setText(name);
+        realname.setText(targetUser.getName());
 
         TextView userFollowers = (TextView) findViewById(R.id.userFollowers);
-        userFollowers.setText(followers + " followers");
+        userFollowers.setText(customFormat.format(targetUser.getFollowersCount()) + " followers");
     }
-
-//    public String tweetCreate() {
-//        final TextView tweet = (TextView) findViewById(R.id.customText);
-//        RequestQueue queue1 = Volley.newRequestQueue(this);
-//        //Get.friends/Ids sample string request experiment
-//        StringRequest getFriends = new StringRequest(Request.Method.GET, "https://api.twitter.com/1.1/friends/ids.json",
-//                new Response.Listener<String>() {
-//                    @SuppressLint("SetTextI18n")
-//                    public void onResponse(String response) {
-//                        // Do something with response
-//                        tweet.setText("verified");
-//                    }
-//                }, new Response.ErrorListener() {
-//            public void onErrorResponse(VolleyError error) {
-//                // handle error
-//                tweet.setText("That didn't work!");
-//            }
-//        });
-//        queue1.add(getFriends);
-//        System.out.println(tweet.toString());
-//        return tweet.toString();
-//    }
 }
-
-
-    /*Button newPersonButton = (Button) findViewById(R.id.newPersonButton);
-
-    //click new person button?
-    public String clicked() {
-        //clicks button
-        newPersonButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            }
-        });
-        if (newPersonButton.isPressed()) {
-            return "verified";
-        }
-        return "yesterdays user??";
-    }
-    //send tweet?
-    public String tweet() {
-        if (clicked().equals("verified")) {
-            tweetButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                }
-            });
-            return "tweet";
-        }
-        return null;
-    }*/
-
-//}
