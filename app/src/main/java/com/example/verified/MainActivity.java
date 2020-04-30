@@ -3,13 +3,17 @@ package com.example.verified;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Random;
@@ -75,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
 
         Random random = new Random();
         targetUser = userList.get(random.nextInt(userList.size()));
+
+        ImageView profilePicture = (ImageView) findViewById(R.id.profilePicture);
+        try {
+            URL pic = new URL(targetUser.getBiggerProfileImageURLHttps());
+            InputStream is = (InputStream) pic.getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            profilePicture.setImageDrawable(d);
+        } catch (Exception e) {
+            System.out.println("oopsies Could not fetch profile pic");
+            e.printStackTrace();
+        }
 
         TextView userHandle = (TextView) findViewById(R.id.userHandle);
         userHandle.setText("@" + targetUser.getScreenName());
